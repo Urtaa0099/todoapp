@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            width: 350px;
+            height: 80vh;
+            background-color: rgb(93, 174, 232);
+            box-shadow: 25px;
+            border-radius: 10px;
+        }
+        .count{
+            margin: 5px;           
+            font-size: 20px;
+        }
+        .grocery{
+            font-size: 60px;
+            display: flex;
+            justify-content: center;
+        }
+        .txt{
+            height: 30px;
+            width: 200px;
+            margin-left: 20px;
+        }
+        ul li{
+            cursor: pointer;
+            padding: 12px 8px 12px 20px;
+            list-style-type: none;
+            font-size: 18px;
+            transition: 0.2s;
+     }   
+        ul li.checked{
+            width: 100px;
+            text-decoration: line-through;
+        }
+        ul li.checked::before{
+            font-size: 50px;        
+            border-style: solid;
+            top:10px;          
+            transform:rotate(45deg);
+            height: 155px;
+            width: 60px;
+        }
+        .close {
+            left: 50px;
+            margin-left:100px;
+            padding: 12px 16px 12px 16px;
+            background-color: #f17b21;
+            border-radius: 50px;
+        } 
+        .font{
+            width: 250px;
+            height: 280px;
+            margin-left:50px;
+            margin-top: 60px;
+        }
+        .item{
+            
+            background-color: gainsboro;
+            height: 30px;
+            width: 100px;
+            font-size: 15px;
+        }
+        .item:hover{
+            background-color: aliceblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="count">Count: <span id="to">0</span></div>
+
+            <h2 class="grocery">Grocery</h2>
+        </div>
+        <ul id="list" class="font">
+        </ul>
+        
+        <input type="text" id="tex" class="txt">
+        <button onclick="it()" class="item">add item</button>
+        
+    </div>
+   
+</body>
+    <script>
+        var myNodelist=document.getElementsByTagName("LI");
+        var i;
+        for( i = 0; i < myNodelist.length; i++){
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            myNodelist[i].appendChild(span);
+        }
+            var close = document.getElementsByClassName("close");
+            var i;
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function() {
+            var div = this.parentElement;
+            div.style.display = "none";
+            }
+        }
+            var list = document.querySelector('ul');
+            list.addEventListener('click', function(ev) {
+        if (ev.target.tagName === 'LI') {
+            ev.target.classList.toggle('checked');
+           
+            }
+        }, false);
+        function it() {
+            var li = document.createElement("li");
+            var inputValue = document.getElementById("tex").value;
+            var t = document.createTextNode(inputValue);
+            li.appendChild(t);
+            if (inputValue === '') {
+                alert("You must write something!");
+            } else {
+                document.getElementById("list").appendChild(li);
+                document.getElementById('to').innerText++;
+            }
+                document.getElementById("tex").value = "";
+
+                var span = document.createElement("SPAN");
+                var txt = document.createTextNode("\u00D7");
+                span.className = "close";
+                span.appendChild(txt);
+                li.appendChild(span);
+
+            for (i = 0; i < close.length; i++) {
+                close[i].onclick = function() {
+                document.getElementById('to').innerText--;
+                var div = this.parentElement;
+                div.style.display = "none";
+                }
+            }
+        }
+    </script>
+</html>
